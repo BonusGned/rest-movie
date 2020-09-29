@@ -12,7 +12,8 @@ class RecursiveSelrialiazer(serializers.Serializer):
     '''Вывод рекурсивно children'''
     def to_representation(self, value):
         serializer = self.parent.parent.__class__(value, context=self.context)
-        return serializer.data
+        return serializer
+
 
 class ActorListSerializer(serializers.ModelSerializer):
     '''Вывод актёров и режиссёров'''
@@ -72,7 +73,7 @@ class CreateRatingSerializer(serializers.ModelSerializer):
         fields = ('star', 'movie')
 
     def create(self, validated_data):
-        rating = Rating.objects.update_or_create(
+        rating, _ = Rating.objects.update_or_create(
             ip=validated_data.get('ip', None),
             movie=validated_data.get('movie', None),
             defaults={'star': validated_data.get('star')}
