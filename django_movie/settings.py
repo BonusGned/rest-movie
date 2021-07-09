@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wo(1_*orwbnsvc#4%04wxyts2gu-u9&a^6+1#2w*66zg3ps%2i'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,12 +48,10 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework_social_oauth2',
 
-    # 'drf_yasg',
 
 
     'django_filters',
 
-    # 'corsheaders',
     'movies',
 ]
 
